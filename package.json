@@ -1,0 +1,17 @@
+{
+  "name": "noavaran-offline-demo",
+  "version": "2.0.0",
+  "description": "Offline APK demo for Noavaran competition game",
+  "scripts": {
+    "build": "echo Static app - no build required",
+    "cap:add:android": "npx cap add android",
+    "cap:sync": "npx cap sync android",
+    "open:android": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "latest",
+    "@capacitor/cli": "latest",
+    "@capacitor/core": "latest"
+  },
+  "devDependencies": {}
+}

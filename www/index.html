@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0d6efd">
+  <title>دموی مسابقه نوآوران</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <nav class="top-menu">
+      <button class="nav-btn active" data-section="homeSection">بازی</button>
+      <button class="nav-btn" data-section="aboutSection">درباره ما</button>
+      <button class="nav-btn" data-section="guideSection">راهنما</button>
+      <a class="site-btn" href="https://www.noavaran2.ir/" target="_blank" rel="noopener">مسابقه اصلی</a>
+    </nav>
+
+    <section id="homeSection" class="page-section active-section">
+      <header class="hero">
+        <div class="brand-badge">مجتمع آموزشی نوآوران</div>
+        <h1>دموی آفلاین مسابقه</h1>
+        <p>چند ثانیه بازی کن، رکورد بزن و برای رقابت اصلی وارد سایت نوآوران شو.</p>
+        <a class="main-link" href="https://www.noavaran2.ir/" target="_blank" rel="noopener">شرکت در مسابقه اصلی</a>
+      </header>
+
+      <section class="stats-grid">
+        <div class="stat-card"><span>امتیاز</span><strong id="scoreDisplay">0</strong></div>
+        <div class="stat-card"><span>رکورد دمو</span><strong id="bestDisplay">0</strong></div>
+        <div class="stat-card"><span>سکه</span><strong id="coinDisplay">0</strong></div>
+        <div class="stat-card"><span>الماس</span><strong id="diamondDisplay">0</strong></div>
+      </section>
+
+      <section class="game-card">
+        <div id="gameStatus" class="status info">برای شروع دمو روی دکمه شروع بزنید.</div>
+        <canvas id="gameCanvas" width="700" height="400"></canvas>
+        <button id="startBtn" class="start-btn">شروع دمو</button>
+        <div class="touch-controls">
+          <button id="leftBtn">◀</button>
+          <button id="jumpBtn">پرش</button>
+          <button id="rightBtn">▶</button>
+        </div>
+      </section>
+
+      <section class="promo-card">
+        <h2>مسابقه اصلی منتظر شماست!</h2>
+        <p>این نسخه فقط دمو و تمرینی است. برای ثبت رکورد واقعی، جوایز و رقابت رسمی وارد سایت مجتمع آموزشی نوآوران شوید.</p>
+        <a href="https://www.noavaran2.ir/" target="_blank" rel="noopener">ورود به سایت نوآوران</a>
+      </section>
+    </section>
+
+    <section id="aboutSection" class="page-section content-card">
+      <h2>درباره مجتمع آموزشی نوآوران</h2>
+      <p>
+        مجتمع آموزشی نوآوران با هدف تقویت انگیزه، رشد علمی و ایجاد فضای رقابتی سالم برای دانش‌آموزان فعالیت می‌کند.
+        این بازی، نسخه دمو و آفلاین مسابقه است تا علاقه‌مندان قبل از ورود به رقابت اصلی، فضای بازی را تجربه کنند.
+      </p>
+      <p>
+        برای شرکت در مسابقه اصلی، ثبت رکورد رسمی و اطلاع از برنامه‌ها و رویدادهای آموزشی، وارد سایت رسمی نوآوران شوید.
+      </p>
+      <a class="big-action" href="https://www.noavaran2.ir/" target="_blank" rel="noopener">ورود به سایت مجتمع آموزشی نوآوران</a>
+    </section>
+
+    <section id="guideSection" class="page-section content-card">
+      <h2>راهنمای بازی</h2>
+      <ul class="guide-list">
+        <li>برای شروع، دکمه «شروع دمو» را بزنید.</li>
+        <li>برای پرش از دکمه «پرش»، لمس صفحه یا کلید Space استفاده کنید.</li>
+        <li>با دکمه‌های چپ و راست، بازیکن را جابه‌جا کنید.</li>
+        <li>سکه و الماس امتیاز بیشتری می‌دهند.</li>
+        <li>این نسخه آفلاین است و رکورد رسمی ثبت نمی‌کند.</li>
+      </ul>
+      <a class="big-action" href="https://www.noavaran2.ir/" target="_blank" rel="noopener">شرکت در مسابقه اصلی</a>
+    </section>
+  </div>
+  <script src="js/game.js"></script>
+</body>
+</html>

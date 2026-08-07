@@ -1,0 +1,8 @@
+{
+  "appId": "ir.noavaran.demo",
+  "appName": "دموی مسابقه نوآوران",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
