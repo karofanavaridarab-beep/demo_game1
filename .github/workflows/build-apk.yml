@@ -10,22 +10,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/core@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
       - name: Install Dependencies
         run: |
           npm install
-          npm install @capacitor/android
-
-      - name: Build Web Assets
-        run: |
-          mkdir -p www
-          # اگر فایل ها در ریشه هستند کپی شوند به www
-          cp index.html www/ 2>/dev/null || true
-          cp -r js www/ 2>/dev/null || true
-          cp -r css www/ 2>/dev/null || true
+          npm install @capacitor/core @capacitor/cli @capacitor/android
 
       - name: Capacitor Sync
         run: |
