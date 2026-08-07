@@ -27,19 +27,16 @@ jobs:
 
       - name: Capacitor Sync
         run: |
-          npx cap add android || true
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
           npx cap sync android
 
       - name: Build APK (Debug)
         run: |
-          if [ -d "android" ]; then
-            cd android
-            chmod +x gradlew
-            ./gradlew assembleDebug
-          else
-            echo "Error: Android folder not found!"
-            exit 1
-          fi
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
