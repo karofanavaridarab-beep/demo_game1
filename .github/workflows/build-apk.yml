@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Android APK (Universal & Signed)
 
 on:
   workflow_dispatch:
@@ -20,10 +20,12 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: '17' # جاوا ۱۷ برای پایداری گریدل در پروژه‌های قدیمی‌تر مناسب‌تر است
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install @capacitor/core @capacitor/cli @capacitor/android
 
       - name: Capacitor Sync
         run: |
@@ -32,14 +34,31 @@ jobs:
           fi
           npx cap sync android
 
-      - name: Build APK (Debug)
+      - name: Set minSdk and Target Options
+        run: |
+          # تنظیم حداقل اندروید به لول ۲۲ (اندروید ۵.۱) برای پوشش حداکثری گوشی‌های قدیمی
+          if [ -f "android/variables.gradle" ]; then
+            sed -i 's/minSdkVersion = .*/minSdkVersion = 22/g' android/variables.gradle
+          fi
+
+      - name: Generate Temporary Keystore for Release Signing
+        run: |
+          keytool -genkey -v -keystore release.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000 -storepass noavaran123 -keypass noavaran123 -dname "CN=Noavaran, OU=Dev, O=Noavaran, L=Darab, S=Fars, C=IR"
+
+      - name: Build APK (Release)
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleRelease
 
-      - name: Upload APK
+      - name: Sign Release APK
+        run: |
+          # پیدا کردن ابزار apksigner در اندروید SDK رانر گیت‌هاب و امضا کردن فایل APK
+          BUILD_TOOLS_DIR=$(ls -d $ANDROID_SDK_ROOT/build-tools/* | tail -1)
+          $BUILD_TOOLS_DIR/apksigner sign --ks release.keystore --ks-key-alias alias_name --ks-pass pass:noavaran123 --key-pass pass:noavaran123 --out android/app/build/outputs/apk/release/app-release-signed.apk android/app/build/outputs/apk/release/app-release-unsigned.apk
+
+      - name: Upload Signed APK
         uses: actions/upload-artifact@v4
         with:
-          name: game-demo-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: game-demo-signed-apk
+          path: android/app/build/outputs/apk/release/app-release-signed.apk
